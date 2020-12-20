@@ -2,17 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>audio</string>
-		<string>location</string>
-	</array>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>I need your speech pleaseee</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Location is needed pleaseee</string>
+	<key>CFBundleDisplayName</key>
+	<string>DrivAR</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -31,10 +24,26 @@
 	<true/>
 	<key>MGLMapboxAccessToken</key>
 	<string>sk.eyJ1IjoiaHViYmFyZDgiLCJhIjoiY2tpcWo5djM0MDl1eDJxdGdpNGp1cGhpYiJ9.U9EPMPHsVM0RMlTwpc38_w</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>I need your music pleaseee</string>
 	<key>NSCameraUsageDescription</key>
 	<string>I need your camera pleaseee</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Location is needed pleaseee</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>I need your location pleaseee</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>I need the microphone pleaseee</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>I need your speech pleaseee</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>HWYGCOND.TTF</string>
+		<string>HWYGWDE.TTF</string>
+		<string>HWYGOTH.TTF</string>
+		<string>HWYGNRRW.TTF</string>
+		<string>HWYGEXPD.TTF</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -56,6 +65,11 @@
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+		<string>location</string>
+	</array>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -78,17 +92,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>HWYGCOND.TTF</string>
-		<string>HWYGWDE.TTF</string>
-		<string>HWYGOTH.TTF</string>
-		<string>HWYGNRRW.TTF</string>
-		<string>HWYGEXPD.TTF</string>
-	</array>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>I need your music pleaseee</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>I need the microphone pleaseee</string>
 </dict>
 </plist>

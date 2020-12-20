@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  HackUMass2020
+
+  Created by Maxwell Hubbard on 12/19/20.
+  
+*/
+"Where" = "Où voudrais-tu aller?";
+"Slow" = "Ralentir!";
+"Try" = "Réessayer";
+"Understand" = "Impossible de comprendre la destination";
+"Limit" = "Limitation de vitesse";
+"Your" = "Ta vitesse";
+"Both" = " miles par heure ou ";
+"Metric" = " kilomètres par heure";
+"Imperial" = " miles par heure";
+"Stop" = "Arrêt devant";
+"Rotary" = "Rond-point à venir";
+"Bump" = "Ralentisseur à venir";
+"Units" = "Unités";
+"Metrics" = "Métrique";
+"Imperials" = "Impérial";
+"Language" = "Langue";

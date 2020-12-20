@@ -108,6 +108,16 @@ class PointOfInterestView: UIView {
     
 }
 
+extension String {
+    func localized(_ lang:String) ->String {
+
+        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
+        let bundle = Bundle(path: path!)
+
+        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+    }
+}
+
 class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate, SFSpeechRecognizerDelegate {
     private var visionManager: VisionReplayManager!
     var visionAManager: VisionManager!
@@ -185,8 +195,74 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
     var camera: Camera?
     
     
+    @IBOutlet weak var hamburgerButton: UIButton!
+    @IBOutlet weak var settingsView: UIVisualEffectView!
+    
+    @IBOutlet weak var unitSlider: UISlider!
+    
+    var units: Units = Units.BOTH
+    
+    let languages: [String] = ["en-US", "fr-FR", "es-ES"]
+    var currentLanguage: String = "en-US"
+    var languageConvert: [String:String] = ["en-US" : "en", "fr-FR" : "fr", "es-ES" : "es"]
+    
+    @IBOutlet weak var yourSpeedLabel: UILabel!
+    @IBOutlet weak var speedLimitLabel: UILabel!
+    @IBOutlet weak var unitsLabel: UILabel!
+    @IBOutlet weak var metricLabel: UILabel!
+    @IBOutlet weak var imperialLabel: UILabel!
+    @IBOutlet weak var languageLabel: UILabel!
+    @IBOutlet weak var languagePicker: UIPickerView!
+    
+    
+    
+    
+    @IBAction func onHamburgerTap(_ sender: UIButton) {
+        
+        if mpsToMPH(speed: vehicleState!.speed) == 0 || liveDemo == false {
+            
+            if self.settingsView.alpha == 0 {
+                UIView.animate(withDuration: 1, animations: {
+                    self.settingsView.alpha = 1
+                })
+            } else {
+                UIView.animate(withDuration: 1, animations: {
+                    self.settingsView.alpha = 0
+                })
+            }
+            
+        }
+        
+    }
+    
+    @IBAction func onUnitSliderChange(_ sender: UISlider) {
+        let stepSize: Float = 1.0
+        unitSlider.setValue(stepSize * floorf((unitSlider.value / stepSize) + 0.5), animated: false)
+                
+        if unitSlider.value == 0 {
+            units = Units.METRIC
+        } else if unitSlider.value == 2 {
+            units = Units.IMPERIAL
+        } else {
+            units = Units.BOTH
+        }
+        
+    }
+    
+    enum Units {
+        case METRIC
+        case IMPERIAL
+        case BOTH
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        hamburgerButton.alpha = 0
+        
+        settingsView.layer.cornerRadius = 5
+        settingsView.clipsToBounds = true
         
         speedLimitView.backgroundColor = .white
         speedLimitNumber.textColor = .black
@@ -208,6 +284,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         speedLimitView.alpha = 0
         yourSpeedView.alpha = 0
         directionView.alpha = 0
+        settingsView.alpha = 0
         
         slowDownView.alpha = 0
         
@@ -219,8 +296,11 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         speechButton.alpha = 0
         destinationView.alpha = 0
         
+        hamburgerButton.layer.cornerRadius = hamburgerButton.frame.width / 2
         
         
+        languagePicker.delegate = self
+        languagePicker.dataSource = self
         
         
         
@@ -275,7 +355,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         
         fileView.alpha = 0
         liveDemo = false
-        
+        hamburgerButton.alpha = 1
         
         let documentsPath =
             NSSearchPathForDirectoriesInDomains(.documentDirectory,
@@ -313,6 +393,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         fileView.alpha = 0
         
         liveDemo = true
+        hamburgerButton.alpha = 1
         
         addARView()
         
@@ -435,7 +516,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             recognitionRequest?.endAudio()
             
         } else {
-            speak(text: "Where would you like to go?")
+            speak(text: "Where".localized(languageConvert[currentLanguage]!))
         }
         
     }
@@ -457,7 +538,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             }
         }
         if carCollisions.first(where: { $0.dangerLevel == .critical }) != nil {
-            slowDownText.text = "Slow Down!"
+            slowDownText.text = "Slow".localized(languageConvert[currentLanguage]!)
             slowDownView.alpha = 1
             
         } else {
@@ -511,14 +592,21 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             return
         }
         
-        yourSpeedNumber.text = String(mpsToMPH(speed: vehicle.speed))
+        if units == Units.METRIC {
+            yourSpeedNumber.text = String(Int(mpsToKPH(speed: vehicle.speed)))
+            speedLimitNumber.text = String(Int(mphToKPH(speed: Int(speedLimit!))))
+        } else {
+            yourSpeedNumber.text = String(mpsToMPH(speed: vehicle.speed))
+            speedLimitNumber.text = String(Int(speedLimit!))
+        }
+        
         
         if vehicle.speed > mphToMPS(speed: Int(speedLimit!)) && speedLimit! > 0 {
             yourSpeedView.contentView.backgroundColor = UIColor(displayP3Red: CGFloat((50.0 / 255.0) * vehicle.speed / mphToMPS(speed: Int(speedLimit!))), green: 0, blue: 0, alpha: 0.5)
             
             if mpsToMPH(speed: vehicle.speed) >= Int(speedLimit!) + 15 {
                 if (previousAlert == 0 || Date().timeIntervalSince1970 - previousAlert > 4) {
-                    speak(text: "Slow Down!")
+                    speak(text: "Slow".localized(languageConvert[currentLanguage]!))
                     previousAlert = Date().timeIntervalSince1970
                 }
                 
@@ -543,6 +631,23 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             }, completion: nil)
         }
         
+        if (mpsToMPH(speed: vehicle.speed) == 0 && hamburgerButton.alpha == 0) || liveDemo == false {
+            UIView.animate(withDuration: 2, delay: 0, options: UIView.AnimationOptions.allowAnimatedContent, animations: {
+                self.hamburgerButton.isEnabled = true
+                self.hamburgerButton.alpha = 1
+                
+            }, completion: nil)
+        } else if mpsToMPH(speed: vehicle.speed) != 0 && hamburgerButton.alpha == 1 && liveDemo {
+            UIView.animate(withDuration: 2, delay: 0, options: UIView.AnimationOptions.allowAnimatedContent, animations: {
+                
+                self.hamburgerButton.isEnabled = false
+                self.hamburgerButton.alpha = 0
+                
+                self.settingsView.alpha = 0
+                
+            }, completion: nil)
+        }
+        
     }
     
     private func updateSpeedLimitView(maxSpeed: Float) {
@@ -550,12 +655,22 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         guard let vehicle = vehicleState else {return}
         
         if maxSpeed > 0 {
-            speedLimitNumber.text = String(Int(maxSpeed))
+            
+            if units == Units.METRIC {
+                speedLimitNumber.text = String(Int(mphToKPH(speed: Int(maxSpeed))))
+            } else {
+                speedLimitNumber.text = String(Int(maxSpeed))
+            }
+            
             speedLimitView.alpha = 1
             yourSpeedView.alpha = 1
         }
         
-        yourSpeedNumber.text = String(mpsToMPH(speed: vehicle.speed))
+        if units == Units.METRIC {
+            yourSpeedNumber.text = String(Int(mpsToKPH(speed: vehicle.speed)))
+        } else {
+            yourSpeedNumber.text = String(mpsToMPH(speed: vehicle.speed))
+        }
         
         if vehicle.speed > mphToMPS(speed: Int(maxSpeed)) && maxSpeed > 0 {
             
@@ -563,7 +678,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             
             if mpsToMPH(speed: vehicle.speed) >= Int(maxSpeed) + 15 {
                 if (previousAlert == 0 || Date().timeIntervalSince1970 - previousAlert > 4) {
-                    speak(text: "Slow Down!")
+                    speak(text: "Slow".localized(languageConvert[currentLanguage]!))
                     previousAlert = Date().timeIntervalSince1970
                 }
                 
@@ -580,8 +695,16 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         return Int(speed * 2.237)
     }
     
+    func mpsToKPH(speed: Float) -> Int {
+        return Int(speed * 3.6)
+    }
+    
     func mphToMPS(speed: Int) -> Float {
         return Float(speed) / 2.237
+    }
+    
+    func mphToKPH(speed: Int) -> Float {
+        return Float(speed) * 1.609
     }
     
     func distToCrash(speed: Float, time: Float) -> Float {
@@ -623,10 +746,11 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             changeBackSound = true
             setVolume(0.3)
         }
-        
-        
+                
         let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        utterance.voice = AVSpeechSynthesisVoice(language: currentLanguage)
+        
+        
         
         if synthesizer.isSpeaking {
             synthesizer.stopSpeaking(at: .word)
@@ -643,7 +767,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             setVolume(0)
         }
         
-        if utterance.speechString == "Where would you like to go?" {
+        if utterance.speechString == "Where".localized(languageConvert[currentLanguage]!) {
             do {
                 try startSpeechRecognition()
             }  catch {
@@ -985,8 +1109,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
     func displayDestination(mapItem: MKMapItem?) {
         
         if mapItem == nil {
-            destinationLabel.text = "Try Again"
-            addressLabel.text = "Could not understand destination"
+            destinationLabel.text = "Try".localized(languageConvert[currentLanguage]!)
+            addressLabel.text = "Understand".localized(languageConvert[currentLanguage]!)
         } else {
             destinationLabel.text = mapItem!.name
             addressLabel.text = getFormattedAddress(pm: mapItem!.placemark)
@@ -1000,7 +1124,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             
         }, completion: { done in
             
-            if self.destinationLabel.text == "Try Again" {
+            if self.destinationLabel.text == "Try".localized(self.languageConvert[self.currentLanguage]!) {
                 UIView.animate(withDuration: 2, delay: 5, options: UIView.AnimationOptions.allowAnimatedContent, animations: {
                     
                     self.destinationView.alpha = 0
@@ -1041,6 +1165,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         
         let options = NavigationRouteOptions(coordinates: [currentLocation.coordinate, destination.coordinate], profileIdentifier: .automobile)
         options.includesSteps = true
+        options.locale = Locale(identifier: languageConvert[currentLanguage]!)
         
         // query a navigation route between location coordinates and pass it to VisionARManager
         
@@ -1212,9 +1337,30 @@ extension ARNavigationViewController: VisionManagerDelegate {
     
 }
 
-extension ARNavigationViewController: VisionARManagerDelegate {
+extension ARNavigationViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
     
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return languages.count
+    }
     
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return languages[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        currentLanguage = languages[row]
+        
+        unitsLabel.text = "Units".localized(languageConvert[currentLanguage]!)
+        metricLabel.text = "Metrics".localized(languageConvert[currentLanguage]!)
+        imperialLabel.text = "Imperials".localized(languageConvert[currentLanguage]!)
+        languageLabel.text = "Language".localized(languageConvert[currentLanguage]!)
+        yourSpeedLabel.text = "Your".localized(languageConvert[currentLanguage]!)
+        speedLimitLabel.text = "Limit".localized(languageConvert[currentLanguage]!)
+        
+    }
     
 }
 
@@ -1256,7 +1402,16 @@ extension ARNavigationViewController: VisionSafetyManagerDelegate {
                     
                     if (previousAlert == 0 || Date().timeIntervalSince1970 - previousAlert > 4) {
                         DispatchQueue.main.async {
-                            self.speak(text: "Speed limit: " + String(Int(sign.sign.number)) + " miles per hour or " + String(Int(self.mphToKPH(mph: sign.sign.number))) + " kilometers per hour")
+                            
+                            if self.units == Units.BOTH {
+                                self.speak(text: "Limit".localized(self.languageConvert[self.currentLanguage]!) + String(Int(sign.sign.number)) + "Both".localized(self.languageConvert[self.currentLanguage]!) + String(Int(self.mphToKPH(mph: sign.sign.number))) + "Metric".localized(self.languageConvert[self.currentLanguage]!))
+                            } else if self.units == Units.IMPERIAL {
+                                self.speak(text: "Limit".localized(self.languageConvert[self.currentLanguage]!) + String(Int(sign.sign.number)) + "Imperial".localized(self.languageConvert[self.currentLanguage]!))
+                            } else {
+                                self.speak(text: "Limit".localized(self.languageConvert[self.currentLanguage]!) + String(Int(self.mphToKPH(mph: sign.sign.number))) + "Metric".localized(self.languageConvert[self.currentLanguage]!))
+                            }
+                            
+                            
                         }
                         
                         previousAlert = Date().timeIntervalSince1970
@@ -1267,7 +1422,7 @@ extension ARNavigationViewController: VisionSafetyManagerDelegate {
                     }
                     if (previousAlert == 0 || Date().timeIntervalSince1970 - previousAlert > 6) {
                         DispatchQueue.main.async {
-                            self.speak(text: "Stop Ahead")
+                            self.speak(text: "Stop".localized(self.languageConvert[self.currentLanguage]!))
                         }
                         
                         previousAlert = Date().timeIntervalSince1970
@@ -1278,7 +1433,7 @@ extension ARNavigationViewController: VisionSafetyManagerDelegate {
                     }
                     if (previousAlert == 0 || Date().timeIntervalSince1970 - previousAlert > 6) {
                         DispatchQueue.main.async {
-                            self.speak(text: "Rotary Ahead")
+                            self.speak(text: "Rotary".localized(self.languageConvert[self.currentLanguage]!) )
                         }
                         
                         previousAlert = Date().timeIntervalSince1970
@@ -1289,7 +1444,7 @@ extension ARNavigationViewController: VisionSafetyManagerDelegate {
                     }
                     if (previousAlert == 0 || Date().timeIntervalSince1970 - previousAlert > 4) {
                         DispatchQueue.main.async {
-                            self.speak(text: "Rotary Ahead")
+                            self.speak(text: "Rotary".localized(self.languageConvert[self.currentLanguage]!))
                         }
                         
                         previousAlert = Date().timeIntervalSince1970
@@ -1309,7 +1464,7 @@ extension ARNavigationViewController: VisionSafetyManagerDelegate {
                     }
                     if (previousAlert == 0 || Date().timeIntervalSince1970 - previousAlert > 4) {
                         DispatchQueue.main.async {
-                            self.speak(text: "Speed Bumps Ahead")
+                            self.speak(text: "Bump".localized(self.languageConvert[self.currentLanguage]!))
                         }
                         
                         previousAlert = Date().timeIntervalSince1970

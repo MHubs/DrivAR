@@ -1,0 +1,42 @@
+
+/* Class = "UILabel"; text = "30"; ObjectID = "4ZH-vz-tD2"; */
+"4ZH-vz-tD2.text" = "30";
+
+/* Class = "UILabel"; text = "Imperial"; ObjectID = "8vg-7V-gKd"; */
+"8vg-7V-gKd.text" = "Imperial";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "BCm-9s-n8b"; */
+"BCm-9s-n8b.text" = "Label";
+
+/* Class = "UILabel"; text = "25"; ObjectID = "NAd-r6-Fxj"; */
+"NAd-r6-Fxj.text" = "25";
+
+/* Class = "UILabel"; text = "Speed Limit"; ObjectID = "NEY-ki-HfM"; */
+"NEY-ki-HfM.text" = "Speed Limit";
+
+/* Class = "UILabel"; text = "Metric"; ObjectID = "TXS-Hw-xkQ"; */
+"TXS-Hw-xkQ.text" = "Metric";
+
+/* Class = "UILabel"; text = "Your Speed"; ObjectID = "X4u-Ot-wyb"; */
+"X4u-Ot-wyb.text" = "Your Speed";
+
+/* Class = "UIButton"; normalTitle = "Record"; ObjectID = "fKx-Sw-zxc"; */
+"fKx-Sw-zxc.normalTitle" = "Record";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "k30-11-uMB"; */
+"k30-11-uMB.text" = "Address";
+
+/* Class = "UILabel"; text = "Destination"; ObjectID = "l7t-bR-pYM"; */
+"l7t-bR-pYM.text" = "Destination";
+
+/* Class = "UIButton"; normalTitle = "Load Recording"; ObjectID = "ufN-kg-4MK"; */
+"ufN-kg-4MK.normalTitle" = "Load Recording";
+
+/* Class = "UILabel"; text = "Slow Down!"; ObjectID = "vdF-WT-Z9f"; */
+"vdF-WT-Z9f.text" = "Slow Down!";
+
+/* Class = "UILabel"; text = "Units"; ObjectID = "vda-Fq-k1A"; */
+"vda-Fq-k1A.text" = "Units";
+
+/* Class = "UILabel"; text = "Language"; ObjectID = "wg4-Iu-znc"; */
+"wg4-Iu-znc.text" = "Language";
