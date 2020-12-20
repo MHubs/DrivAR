@@ -23,7 +23,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MGLMapboxAccessToken</key>
-	<string>sk.eyJ1IjoiaHViYmFyZDgiLCJhIjoiY2tpcWo5djM0MDl1eDJxdGdpNGp1cGhpYiJ9.U9EPMPHsVM0RMlTwpc38_w</string>
+	<string>pk.eyJ1IjoiaHViYmFyZDgiLCJhIjoiY2sxdm9uMmxvMDVnNzNvczl0aWQwa25nNSJ9.XkY4d3NF24FA-o2AZSi48g</string>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>I need your music pleaseee</string>
 	<key>NSCameraUsageDescription</key>
