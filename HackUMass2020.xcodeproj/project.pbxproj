@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C60B80B6A556D72D271DBD3 /* Pods_HackUMass2020_HackUMass2020UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7F76DBEEBB4455CFB4D518 /* Pods_HackUMass2020_HackUMass2020UITests.framework */; };
+		D0670C74258AF74400FE1E78 /* ARNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0670C73258AF74400FE1E78 /* ARNavigationViewController.swift */; };
+		D0CBE970258C05B5006F450E /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CBE96F258C05B5006F450E /* RecordViewController.swift */; };
+		D0CBE975258D010C006F450E /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CBE974258D010C006F450E /* TestViewController.swift */; };
+		D0CBE980258D721C006F450E /* HWYGEXPD.TTF in Resources */ = {isa = PBXBuildFile; fileRef = D0CBE97D258D71FF006F450E /* HWYGEXPD.TTF */; };
+		D0CBE984258D721F006F450E /* HWYGNRRW.TTF in Resources */ = {isa = PBXBuildFile; fileRef = D0CBE97C258D71FF006F450E /* HWYGNRRW.TTF */; };
+		D0CBE985258D7222006F450E /* HWYGOTH.TTF in Resources */ = {isa = PBXBuildFile; fileRef = D0CBE97F258D71FF006F450E /* HWYGOTH.TTF */; };
+		D0CBE989258D7224006F450E /* HWYGWDE.TTF in Resources */ = {isa = PBXBuildFile; fileRef = D0CBE97E258D71FF006F450E /* HWYGWDE.TTF */; };
+		D0CBE98D258D7227006F450E /* HWYGCOND.TTF in Resources */ = {isa = PBXBuildFile; fileRef = D0CBE97B258D71EE006F450E /* HWYGCOND.TTF */; };
+		D0CBE992258D7F8A006F450E /* RadialGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CBE991258D7F8A006F450E /* RadialGradientLayer.swift */; };
 		D0D02CFC25896A89006AFB73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D02CFB25896A89006AFB73 /* AppDelegate.swift */; };
 		D0D02CFE25896A89006AFB73 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D02CFD25896A89006AFB73 /* SceneDelegate.swift */; };
 		D0D02D0025896A89006AFB73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D02CFF25896A89006AFB73 /* ViewController.swift */; };
@@ -15,6 +25,8 @@
 		D0D02D0825896A8C006AFB73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0D02D0625896A8C006AFB73 /* LaunchScreen.storyboard */; };
 		D0D02D1325896A8C006AFB73 /* HackUMass2020Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D02D1225896A8C006AFB73 /* HackUMass2020Tests.swift */; };
 		D0D02D1E25896A8C006AFB73 /* HackUMass2020UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D02D1D25896A8C006AFB73 /* HackUMass2020UITests.swift */; };
+		DA103AC611363B3367B47538 /* Pods_HackUMass2020.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 246DDED287C09356509EE649 /* Pods_HackUMass2020.framework */; };
+		F34480623CFE9B64FA3C7FB5 /* Pods_HackUMass2020Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0224D4C847998DC1D905570E /* Pods_HackUMass2020Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +47,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0224D4C847998DC1D905570E /* Pods_HackUMass2020Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HackUMass2020Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		246DDED287C09356509EE649 /* Pods_HackUMass2020.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HackUMass2020.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A0812C7B3737B1A248D0388 /* Pods-HackUMass2020.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackUMass2020.release.xcconfig"; path = "Target Support Files/Pods-HackUMass2020/Pods-HackUMass2020.release.xcconfig"; sourceTree = "<group>"; };
+		52EAEAC91A584E83BAB7DA9F /* Pods-HackUMass2020.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackUMass2020.debug.xcconfig"; path = "Target Support Files/Pods-HackUMass2020/Pods-HackUMass2020.debug.xcconfig"; sourceTree = "<group>"; };
+		5CD38589F36D80173BA592ED /* Pods-HackUMass2020Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackUMass2020Tests.debug.xcconfig"; path = "Target Support Files/Pods-HackUMass2020Tests/Pods-HackUMass2020Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		C01A6286C4315D53B35CF793 /* Pods-HackUMass2020-HackUMass2020UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackUMass2020-HackUMass2020UITests.release.xcconfig"; path = "Target Support Files/Pods-HackUMass2020-HackUMass2020UITests/Pods-HackUMass2020-HackUMass2020UITests.release.xcconfig"; sourceTree = "<group>"; };
+		C636C93536191746644678FE /* Pods-HackUMass2020Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackUMass2020Tests.release.xcconfig"; path = "Target Support Files/Pods-HackUMass2020Tests/Pods-HackUMass2020Tests.release.xcconfig"; sourceTree = "<group>"; };
+		D0670C73258AF74400FE1E78 /* ARNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARNavigationViewController.swift; sourceTree = "<group>"; };
+		D0CBE96F258C05B5006F450E /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		D0CBE974258D010C006F450E /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		D0CBE97B258D71EE006F450E /* HWYGCOND.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = HWYGCOND.TTF; sourceTree = "<group>"; };
+		D0CBE97C258D71FF006F450E /* HWYGNRRW.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = HWYGNRRW.TTF; sourceTree = "<group>"; };
+		D0CBE97D258D71FF006F450E /* HWYGEXPD.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = HWYGEXPD.TTF; sourceTree = "<group>"; };
+		D0CBE97E258D71FF006F450E /* HWYGWDE.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = HWYGWDE.TTF; sourceTree = "<group>"; };
+		D0CBE97F258D71FF006F450E /* HWYGOTH.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = HWYGOTH.TTF; sourceTree = "<group>"; };
+		D0CBE991258D7F8A006F450E /* RadialGradientLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadialGradientLayer.swift; sourceTree = "<group>"; };
 		D0D02CF825896A89006AFB73 /* HackUMass2020.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackUMass2020.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0D02CFB25896A89006AFB73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0D02CFD25896A89006AFB73 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +77,9 @@
 		D0D02D1925896A8C006AFB73 /* HackUMass2020UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackUMass2020UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0D02D1D25896A8C006AFB73 /* HackUMass2020UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackUMass2020UITests.swift; sourceTree = "<group>"; };
 		D0D02D1F25896A8C006AFB73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0D18A8B258E8E5100A422D6 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		DDB13AE4B5C5FE472E35D3A0 /* Pods-HackUMass2020-HackUMass2020UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackUMass2020-HackUMass2020UITests.debug.xcconfig"; path = "Target Support Files/Pods-HackUMass2020-HackUMass2020UITests/Pods-HackUMass2020-HackUMass2020UITests.debug.xcconfig"; sourceTree = "<group>"; };
+		EB7F76DBEEBB4455CFB4D518 /* Pods_HackUMass2020_HackUMass2020UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HackUMass2020_HackUMass2020UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA103AC611363B3367B47538 /* Pods_HackUMass2020.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F34480623CFE9B64FA3C7FB5 /* Pods_HackUMass2020Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +103,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C60B80B6A556D72D271DBD3 /* Pods_HackUMass2020_HackUMass2020UITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4657E8F1B4255217F6470C4C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D0D18A8B258E8E5100A422D6 /* libz.tbd */,
+				246DDED287C09356509EE649 /* Pods_HackUMass2020.framework */,
+				EB7F76DBEEBB4455CFB4D518 /* Pods_HackUMass2020_HackUMass2020UITests.framework */,
+				0224D4C847998DC1D905570E /* Pods_HackUMass2020Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D0CBE97A258D71D2006F450E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D0CBE97D258D71FF006F450E /* HWYGEXPD.TTF */,
+				D0CBE97C258D71FF006F450E /* HWYGNRRW.TTF */,
+				D0CBE97F258D71FF006F450E /* HWYGOTH.TTF */,
+				D0CBE97E258D71FF006F450E /* HWYGWDE.TTF */,
+				D0CBE97B258D71EE006F450E /* HWYGCOND.TTF */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		D0D02CEF25896A89006AFB73 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +140,8 @@
 				D0D02D1125896A8C006AFB73 /* HackUMass2020Tests */,
 				D0D02D1C25896A8C006AFB73 /* HackUMass2020UITests */,
 				D0D02CF925896A89006AFB73 /* Products */,
+				F402BB298C7C8C5A250CBDFF /* Pods */,
+				4657E8F1B4255217F6470C4C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +158,7 @@
 		D0D02CFA25896A89006AFB73 /* HackUMass2020 */ = {
 			isa = PBXGroup;
 			children = (
+				D0CBE97A258D71D2006F450E /* Fonts */,
 				D0D02CFB25896A89006AFB73 /* AppDelegate.swift */,
 				D0D02CFD25896A89006AFB73 /* SceneDelegate.swift */,
 				D0D02CFF25896A89006AFB73 /* ViewController.swift */,
@@ -106,6 +166,10 @@
 				D0D02D0425896A8C006AFB73 /* Assets.xcassets */,
 				D0D02D0625896A8C006AFB73 /* LaunchScreen.storyboard */,
 				D0D02D0925896A8C006AFB73 /* Info.plist */,
+				D0670C73258AF74400FE1E78 /* ARNavigationViewController.swift */,
+				D0CBE96F258C05B5006F450E /* RecordViewController.swift */,
+				D0CBE974258D010C006F450E /* TestViewController.swift */,
+				D0CBE991258D7F8A006F450E /* RadialGradientLayer.swift */,
 			);
 			path = HackUMass2020;
 			sourceTree = "<group>";
@@ -128,6 +192,19 @@
 			path = HackUMass2020UITests;
 			sourceTree = "<group>";
 		};
+		F402BB298C7C8C5A250CBDFF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				52EAEAC91A584E83BAB7DA9F /* Pods-HackUMass2020.debug.xcconfig */,
+				3A0812C7B3737B1A248D0388 /* Pods-HackUMass2020.release.xcconfig */,
+				DDB13AE4B5C5FE472E35D3A0 /* Pods-HackUMass2020-HackUMass2020UITests.debug.xcconfig */,
+				C01A6286C4315D53B35CF793 /* Pods-HackUMass2020-HackUMass2020UITests.release.xcconfig */,
+				5CD38589F36D80173BA592ED /* Pods-HackUMass2020Tests.debug.xcconfig */,
+				C636C93536191746644678FE /* Pods-HackUMass2020Tests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +212,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0D02D2225896A8C006AFB73 /* Build configuration list for PBXNativeTarget "HackUMass2020" */;
 			buildPhases = (
+				BC39568F422D875565E849B5 /* [CP] Check Pods Manifest.lock */,
 				D0D02CF425896A89006AFB73 /* Sources */,
 				D0D02CF525896A89006AFB73 /* Frameworks */,
 				D0D02CF625896A89006AFB73 /* Resources */,
+				9858B9AC6A239B60D8FFD970 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -152,6 +231,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0D02D2525896A8C006AFB73 /* Build configuration list for PBXNativeTarget "HackUMass2020Tests" */;
 			buildPhases = (
+				2D9E7BA7084B1794FAB5BE7D /* [CP] Check Pods Manifest.lock */,
 				D0D02D0A25896A8C006AFB73 /* Sources */,
 				D0D02D0B25896A8C006AFB73 /* Frameworks */,
 				D0D02D0C25896A8C006AFB73 /* Resources */,
@@ -170,9 +250,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0D02D2825896A8C006AFB73 /* Build configuration list for PBXNativeTarget "HackUMass2020UITests" */;
 			buildPhases = (
+				AF626794C3ADA5C30CF5AAE1 /* [CP] Check Pods Manifest.lock */,
 				D0D02D1525896A8C006AFB73 /* Sources */,
 				D0D02D1625896A8C006AFB73 /* Frameworks */,
 				D0D02D1725896A8C006AFB73 /* Resources */,
+				C5CC3AE5783A20F25AD93522 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -231,7 +313,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0CBE980258D721C006F450E /* HWYGEXPD.TTF in Resources */,
+				D0CBE989258D7224006F450E /* HWYGWDE.TTF in Resources */,
+				D0CBE985258D7222006F450E /* HWYGOTH.TTF in Resources */,
+				D0CBE98D258D7227006F450E /* HWYGCOND.TTF in Resources */,
 				D0D02D0825896A8C006AFB73 /* LaunchScreen.storyboard in Resources */,
+				D0CBE984258D721F006F450E /* HWYGNRRW.TTF in Resources */,
 				D0D02D0525896A8C006AFB73 /* Assets.xcassets in Resources */,
 				D0D02D0325896A89006AFB73 /* Main.storyboard in Resources */,
 			);
@@ -253,6 +340,105 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2D9E7BA7084B1794FAB5BE7D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HackUMass2020Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9858B9AC6A239B60D8FFD970 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HackUMass2020/Pods-HackUMass2020-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF626794C3ADA5C30CF5AAE1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HackUMass2020-HackUMass2020UITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BC39568F422D875565E849B5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HackUMass2020-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C5CC3AE5783A20F25AD93522 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HackUMass2020-HackUMass2020UITests/Pods-HackUMass2020-HackUMass2020UITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D0D02CF425896A89006AFB73 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -260,6 +446,10 @@
 			files = (
 				D0D02D0025896A89006AFB73 /* ViewController.swift in Sources */,
 				D0D02CFC25896A89006AFB73 /* AppDelegate.swift in Sources */,
+				D0CBE970258C05B5006F450E /* RecordViewController.swift in Sources */,
+				D0670C74258AF74400FE1E78 /* ARNavigationViewController.swift in Sources */,
+				D0CBE975258D010C006F450E /* TestViewController.swift in Sources */,
+				D0CBE992258D7F8A006F450E /* RadialGradientLayer.swift in Sources */,
 				D0D02CFE25896A89006AFB73 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,11 +623,28 @@
 		};
 		D0D02D2325896A8C006AFB73 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52EAEAC91A584E83BAB7DA9F /* Pods-HackUMass2020.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4N252H9C76;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MapboxCoreNavigation/MapboxCoreNavigation.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MapboxDirections.swift/MapboxDirections.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MapboxMobileEvents/MapboxMobileEvents.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MapboxNavigation/MapboxNavigation.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MapboxSpeech/MapboxSpeech.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MapboxVision/MapboxVision.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MapboxVisionAR/MapboxVisionAR.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MapboxVisionSafety/MapboxVisionSafety.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Polyline/Polyline.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Solar/Solar.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Turf/Turf.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.framework/Headers\"",
+					"$(SRCROOT)/Libraries/Mapbox/Core/Plugins/iOS/MapboxMobileEvents/include/**",
+				);
 				INFOPLIST_FILE = HackUMass2020/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -452,11 +659,28 @@
 		};
 		D0D02D2425896A8C006AFB73 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A0812C7B3737B1A248D0388 /* Pods-HackUMass2020.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4N252H9C76;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MapboxCoreNavigation/MapboxCoreNavigation.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MapboxDirections.swift/MapboxDirections.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MapboxMobileEvents/MapboxMobileEvents.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MapboxNavigation/MapboxNavigation.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MapboxSpeech/MapboxSpeech.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MapboxVision/MapboxVision.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MapboxVisionAR/MapboxVisionAR.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MapboxVisionSafety/MapboxVisionSafety.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Polyline/Polyline.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Solar/Solar.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Turf/Turf.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation/ZIPFoundation.framework/Headers\"",
+					"$(SRCROOT)/Libraries/Mapbox/Core/Plugins/iOS/MapboxMobileEvents/include/**",
+				);
 				INFOPLIST_FILE = HackUMass2020/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -471,6 +695,7 @@
 		};
 		D0D02D2625896A8C006AFB73 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5CD38589F36D80173BA592ED /* Pods-HackUMass2020Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -493,6 +718,7 @@
 		};
 		D0D02D2725896A8C006AFB73 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C636C93536191746644678FE /* Pods-HackUMass2020Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -515,6 +741,7 @@
 		};
 		D0D02D2925896A8C006AFB73 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DDB13AE4B5C5FE472E35D3A0 /* Pods-HackUMass2020-HackUMass2020UITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -535,6 +762,7 @@
 		};
 		D0D02D2A25896A8C006AFB73 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C01A6286C4315D53B35CF793 /* Pods-HackUMass2020-HackUMass2020UITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

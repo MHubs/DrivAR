@@ -14,6 +14,16 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func toCreate(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "toCreate", sender: self)
+    }
+    
+    @IBAction func toLoad(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "toLoad", sender: self)
+    }
+    
+    @IBAction func toTest(_ sender: Any) {
+        self.performSegue(withIdentifier: "toTest", sender: self)
+    }
 }
 
