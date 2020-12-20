@@ -14,99 +14,11 @@ import CoreLocation
 import MapKit
 import RadarSDK
 
-/**
- * "Safety alerts" example demonstrates how to utilize events from MapboxVisionSafetyManager
- * to alert a user about exceeding allowed speed limit and potential collisions with other cars.
+
+/*
+    String extension to provide localization in other languages
+    New function reads in desired language and gets the value the current string is associated with in the language file
  */
-
-// Custom UIView to draw a red bounding box
-class CollisionDetectionView: UIView {
-    
-    private var alertOverspeedingView: UIView!
-    private let gradientLayer = RadialGradientLayer()
-    var startTime: TimeInterval!
-    
-    var colors: [UIColor] {
-        get {
-            return gradientLayer.colors
-        }
-        set {
-            gradientLayer.colors = newValue
-        }
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        startTime = Date().timeIntervalSince1970
-        // Transparent view with a red border
-        backgroundColor = .clear
-        colors = [UIColor(displayP3Red: 200.0/255.0, green: 0, blue: 0, alpha: 0.75), .clear]
-        
-        alertOverspeedingView = UIImageView(image: UIImage(named: "alert"))
-        alertOverspeedingView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(alertOverspeedingView)
-        NSLayoutConstraint.activate([
-            alertOverspeedingView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            alertOverspeedingView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            alertOverspeedingView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.33),
-            alertOverspeedingView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.33)
-        ])
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if gradientLayer.superlayer == nil {
-            layer.insertSublayer(gradientLayer, at: 0)
-        }
-        gradientLayer.frame = bounds
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-class PointOfInterestView: UIView {
-    
-    var imageView: UIImageView!
-    var text: UILabel!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        imageView = UIImageView()
-        text = UILabel()
-        
-        text.numberOfLines = 0
-        text.lineBreakMode = .byWordWrapping
-        text.textAlignment = .center
-        text.font = UIFont.systemFont(ofSize: 5)
-        
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(imageView)
-        NSLayoutConstraint.activate([
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
-            imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7)
-        ])
-        
-        text.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(text)
-        NSLayoutConstraint.activate([
-            text.topAnchor.constraint(equalTo: topAnchor),
-            text.centerXAnchor.constraint(equalTo: centerXAnchor),
-            text.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
-            text.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3)
-        ])
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
 
 extension String {
     func localized(_ lang:String) ->String {
@@ -117,6 +29,12 @@ extension String {
         return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
     }
 }
+
+/*
+    Main Class to handle... everything
+ */
+
+
 
 class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate, SFSpeechRecognizerDelegate {
     private var visionManager: VisionReplayManager!
@@ -140,7 +58,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
     private var speedLimit: Float?
     private var carCollisions = [CollisionObject]()
     
-    private var liveDemo: Bool = false
+    private var liveDemo: Bool = false // True if using AR capabilities
     
     private var acceleration: Float!
     private var timeSinceUpdate: TimeInterval!
@@ -180,8 +98,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
     
     private var wakeRecognitionTask: SFSpeechRecognitionTask?
     
-    var recording: Bool = false
-    var calibrated: Bool = false
+    var recording: Bool = false // True if recording the session
+    var calibrated: Bool = false // True if camera is done calibrating
     
     @IBOutlet weak var speechButton: UIImageView!
     @IBOutlet weak var destinationView: UIVisualEffectView!
@@ -204,7 +122,10 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
     
     let languages: [String] = ["en-US", "fr-FR", "es-ES"]
     var currentLanguage: String = "en-US"
-    var languageConvert: [String:String] = ["en-US" : "en", "fr-FR" : "fr", "es-ES" : "es"]
+    var languageConvert: [String:String] = ["en-US" : "en", "fr-FR" : "fr", "es-ES" : "es"] // Conversion needed since some resources require "en-US" and some just "en"
+    
+    
+    // These variables are just to change the text for localization
     
     @IBOutlet weak var yourSpeedLabel: UILabel!
     @IBOutlet weak var speedLimitLabel: UILabel!
@@ -215,7 +136,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
     @IBOutlet weak var languagePicker: UIPickerView!
     
     
-    
+    // Settings button was previously a hamburger menu but is not anymore, needs a name change
     
     @IBAction func onHamburgerTap(_ sender: UIButton) {
         
@@ -234,6 +155,9 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         }
         
     }
+    
+    
+    // Handle changing from metric to imperial
     
     @IBAction func onUnitSliderChange(_ sender: UISlider) {
         let stepSize: Float = 1.0
@@ -255,6 +179,10 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         case BOTH
     }
     
+    
+    //MARK: - Intialization Process
+    // Load in most UIViews but exclude anything to do with AR or Vision
+    // Look at user files and display previous sessions for viewing
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -345,9 +273,12 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         }
     }
     
-    class FileTapGesture: UITapGestureRecognizer {
-        var item: String!
-    }
+    
+    //MARK: - Testing Initialization
+    /*
+        Set up NON-AR view
+        Load recording and prepare sensor data
+     */
     
     @objc func setUp(_ sender: FileTapGesture) {
         
@@ -385,6 +316,13 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         
         
     }
+    
+    
+    //MARK: - Live Demo Initialization
+    /*
+        Set up AR view, this is for live demonstrations while driving
+        Enable camera, start calibration, enable speech to text, set up GPS
+     */
     
     @objc func setUpAR(_ sender: FileTapGesture) {
         
@@ -479,18 +417,21 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         
     }
     
-    private func addARView() {
+    // Add ViewController to a ViewController
+    
+    private func addARView() { //Used for live demos
         addChild(visionARViewController)
         backView.addSubview(visionARViewController.view)
         visionARViewController.didMove(toParent: self)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
+    private func addVisionView() { //Used for testing
+        addChild(visionViewController)
+        backView.addSubview(visionViewController.view)
+        visionViewController.didMove(toParent: self)
     }
     
+    // Stop processes when app closed
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -509,6 +450,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         visionManager.destroy()
     }
     
+    // Start/stop speech to text when button is clicked
+    
     @objc func onMicrophoneTap() {
         
         if audioEngine.isRunning {
@@ -519,12 +462,6 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             speak(text: "Where".localized(languageConvert[currentLanguage]!))
         }
         
-    }
-    
-    private func addVisionView() {
-        addChild(visionViewController)
-        backView.addSubview(visionViewController.view)
-        visionViewController.didMove(toParent: self)
     }
     
     // MARK: - Handle VisionSafety events
@@ -584,6 +521,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         }
     }
     
+    //MARK: - Updating Speed and Speed Limits
+    
     private func updateSpeed() {
         // when update is completed all the data has the most current state
         guard let vehicle = vehicleState else {return}
@@ -592,6 +531,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             return
         }
         
+        // Convert to metric if user specified, imperial by default
         if units == Units.METRIC {
             yourSpeedNumber.text = String(Int(mpsToKPH(speed: vehicle.speed)))
             speedLimitNumber.text = String(Int(mphToKPH(speed: Int(speedLimit!))))
@@ -600,11 +540,12 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             speedLimitNumber.text = String(Int(speedLimit!))
         }
         
-        
+        // If above speedlimit, display increasingly red background
         if vehicle.speed > mphToMPS(speed: Int(speedLimit!)) && speedLimit! > 0 {
             yourSpeedView.contentView.backgroundColor = UIColor(displayP3Red: CGFloat((50.0 / 255.0) * vehicle.speed / mphToMPS(speed: Int(speedLimit!))), green: 0, blue: 0, alpha: 0.5)
             
             if mpsToMPH(speed: vehicle.speed) >= Int(speedLimit!) + 15 {
+                // Auduble slow down if 15 over speed limit
                 if (previousAlert == 0 || Date().timeIntervalSince1970 - previousAlert > 4) {
                     speak(text: "Slow".localized(languageConvert[currentLanguage]!))
                     previousAlert = Date().timeIntervalSince1970
@@ -617,6 +558,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             yourSpeedView.contentView.backgroundColor = .clear
         }
         
+        // If stopped, display destination as a fun indicator
         if mpsToMPH(speed: vehicle.speed) == 0 && destinationView.alpha <= 0.11 && destinationView.alpha > 0 {
             UIView.animate(withDuration: 2, delay: 0, options: UIView.AnimationOptions.allowAnimatedContent, animations: {
                 
@@ -631,6 +573,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             }, completion: nil)
         }
         
+        // If stopped display settings button, remove if moving. Always keep button if not in live demo
         if (mpsToMPH(speed: vehicle.speed) == 0 && hamburgerButton.alpha == 0) || liveDemo == false {
             UIView.animate(withDuration: 2, delay: 0, options: UIView.AnimationOptions.allowAnimatedContent, animations: {
                 self.hamburgerButton.isEnabled = true
@@ -650,12 +593,15 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         
     }
     
+    //MARK: - Update speed limit from external source
+    
     private func updateSpeedLimitView(maxSpeed: Float) {
         // when update is completed all the data has the most current state
         guard let vehicle = vehicleState else {return}
         
         if maxSpeed > 0 {
             
+            // Convert to metric, imperial by default
             if units == Units.METRIC {
                 speedLimitNumber.text = String(Int(mphToKPH(speed: Int(maxSpeed))))
             } else {
@@ -672,11 +618,13 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             yourSpeedNumber.text = String(mpsToMPH(speed: vehicle.speed))
         }
         
+        // Display increasingly red background when over kimit
         if vehicle.speed > mphToMPS(speed: Int(maxSpeed)) && maxSpeed > 0 {
             
             yourSpeedView.contentView.backgroundColor = UIColor(displayP3Red: CGFloat((50.0 / 255.0) * vehicle.speed / mphToMPS(speed: Int(maxSpeed))), green: 0, blue: 0, alpha: 0.5)
             
             if mpsToMPH(speed: vehicle.speed) >= Int(maxSpeed) + 15 {
+                // Alert if 15 over limit
                 if (previousAlert == 0 || Date().timeIntervalSince1970 - previousAlert > 4) {
                     speak(text: "Slow".localized(languageConvert[currentLanguage]!))
                     previousAlert = Date().timeIntervalSince1970
@@ -690,6 +638,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         }
         
     }
+    
+    //MARK: - Functions to convert between units
     
     func mpsToMPH(speed: Float) -> Int {
         return Int(speed * 2.237)
@@ -715,6 +665,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         return meters * 3.281
     }
     
+    //MARK: - Set the volume of the User's device
+    
     func setVolume(_ volume: Float) {
         
         let slider = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
@@ -723,6 +675,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             slider?.value = volume
         }
     }
+    
+    //MARK: - Get current volume
     
     func getVolume() -> Float {
         // Search for the slider
@@ -733,15 +687,18 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         
     }
     
+    //MARK: - Text to Speech processing
+    
     func speak(text: String) {
         
-        
+        // Allows for voice to be heard on silent ringer
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback)
         } catch(let error) {
             print(error.localizedDescription)
         }
         
+        // Change sound if silent, will change back later
         if getVolume() == 0 {
             changeBackSound = true
             setVolume(0.3)
@@ -750,7 +707,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         let utterance = AVSpeechUtterance(string: text)
         utterance.voice = AVSpeechSynthesisVoice(language: currentLanguage)
         
-        
+        // Stop current speaking when done with wordd
         
         if synthesizer.isSpeaking {
             synthesizer.stopSpeaking(at: .word)
@@ -761,12 +718,18 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         
     }
     
+    
+    //MARK: - Speech finished
+    
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        
+        // Change sound back to 0 if it was previously
         if changeBackSound {
             changeBackSound = false
             setVolume(0)
         }
         
+        // Enable Speech recognition after asking where to go
         if utterance.speechString == "Where".localized(languageConvert[currentLanguage]!) {
             do {
                 try startSpeechRecognition()
@@ -776,7 +739,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         }
     }
     
-    
+    //MARK: - Get a list of nearby points of interest
     
     func getNearbyPOIs() {
         
@@ -786,6 +749,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         
         let location = CLLocation(latitude: vehicleState!.location.coordinate.lat, longitude: vehicleState!.location.coordinate.lon)
         
+        // Use Radar.io to recieve a list of locations nearby
+        
         Radar.searchPlaces(near: location, radius: 1000, chains:nil, categories: pointOfInterestCategories, groups: nil, limit: 90){
             (status, loc, places) in
             
@@ -794,6 +759,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
                 if places!.count > 0 {
                     
                     self.pointsOfInterest.removeAll()
+                    
+                    // Sort by category and associate with specific category image
                     
                     for place in places! {
                         
@@ -820,19 +787,25 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         
     }
     
+    //MARK: - Draw points of interest to the screen
+    
     private let distanceVisibilityThreshold = 500.0
     private let distanceAboveGround = 16.0
     private let poiDimension = 12.0
     
     func updatePOIs() {
         
+        // Remove all from screen
+        
         for subview in view.subviews {
             if subview.isKind(of: PointOfInterestView.self) {
                 subview.removeFromSuperview()
-                
+
             }
         }
         
+        
+        // Add destination as a special point
         if (destination != nil) && addressLabel.text != "Address" {
             pointsOfInterest[GeoCoordinate(lon: destination.coordinate.longitude, lat: destination.coordinate.latitude)] = (UIImage(named: "destination")!, nil)
         }
@@ -856,7 +829,6 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             }
             
             // by default the translated geo coordinate is placed at 0 height in the world space.
-            // If you'd like to lift it above the ground alter its `z` coordinate
             let worldCoordinateLeftTop =
                 WorldCoordinate(x: poiWorldCoordinate.x,
                                 y: poiWorldCoordinate.y - poiDimension / 2,
@@ -896,6 +868,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
                                   height: rightBottom.y - leftTop.y)
             
             
+            // create actual UIview
             let poiView = PointOfInterestView()
             poiView.imageView.image = image
             if place != nil {
@@ -916,20 +889,16 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
     }
     
     
-    /*
-     
-     AR View
-     
-     */
+    //MARK: - This is stuff that is used during live demos
+
     
     var detectionTimer: Timer?
     
-    
-    
-    
+    // Begin listening for destination
     func startSpeechRecognition() throws  {
         
         
+        // Make microphone bigger as indication to speak
         DispatchQueue.main.async {
             
             UIView.animate(withDuration: 1, animations: {
@@ -979,6 +948,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
                 }
             }
             
+            // If not speaking after 1.5 seconds, assume they are done and process current result
+            
             if let timer = self.detectionTimer, timer.isValid {
                 if isFinal {
                     self.detectionTimer?.invalidate()
@@ -996,6 +967,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
                     
                     if isFinal {
                         
+                        // Return microhpne to normal size
                         DispatchQueue.main.async {
                             
                             UIView.animate(withDuration: 1, animations: {
@@ -1003,6 +975,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
                             })
                         }
                         
+                        // Search for places
                         self.performSearch(searchText: (result?.bestTranscription.formattedString)!)
                         
                     }
@@ -1024,6 +997,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
                 
                 if isFinal {
                     
+                    //Return microphone to normal size
                     DispatchQueue.main.async {
                         UIView.animate(withDuration: 1, animations: {
                             self.speechButton.transform = CGAffineTransform.identity
@@ -1031,7 +1005,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
                     }
                     
                     
-                    
+                    // Search places
                     self.performSearch(searchText: (result?.bestTranscription.formattedString)!)
                     
                 }
@@ -1049,6 +1023,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         try audioEngine.start()
     }
     
+    //MARK: - Search for a location based on an address string
     
     func performSearch(searchText: String) {
         
@@ -1080,6 +1055,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             
         })
         
+        // Create primary search region around user
+        
         let region = MKCoordinateRegion(center: currentLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 2, longitudeDelta: 2))
         
         request.region = region
@@ -1091,6 +1068,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
                 
                 return
             }
+            
+            // Automatically use first response
             
             let item = response.mapItems[0]
             print(item)
@@ -1106,6 +1085,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         
     }
     
+    //MARK: - Display destination so user knows app is working
+    
     func displayDestination(mapItem: MKMapItem?) {
         
         if mapItem == nil {
@@ -1116,7 +1097,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             addressLabel.text = getFormattedAddress(pm: mapItem!.placemark)
         }
         
-        
+        // Make it "Disappear" after a few seconds so it doesn't take up the screen
+        // Still have it show a little bit for effect
         
         UIView.animate(withDuration: 2, animations: {
             
@@ -1143,6 +1125,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         })
     }
     
+    //MARK: - Get a human formatted street address for a placemark
+    
     func getFormattedAddress(pm: MKPlacemark) -> String {
         
         var addressString : String = ""
@@ -1159,6 +1143,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         
         return addressString
     }
+    
+    //MARK: - Navigation Routing
     
     func startRouting() {
         
@@ -1184,6 +1170,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             self?.visionARManager.set(route: Route(route: route))
             
             
+            // Display top half of navigation controller so that instructions are displayed
+            
             let navigationService = MapboxNavigationService(route: route, routeIndex: 0, routeOptions: options)
             
             navigationService.delegate = self
@@ -1194,6 +1182,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             navigationViewController.delegate = self
             self!.addChild(navigationViewController)
             self!.view.addSubview(navigationViewController.view)
+            
+            // Constrain the view to the top center
             navigationViewController.view.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
                 navigationViewController.view.widthAnchor.constraint(equalTo: self!.view.widthAnchor, multiplier: 0.3),
@@ -1210,6 +1200,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         
     }
     
+    //MARK: - Return placemark from lat/long coordinates
+    
     func getStreet(from location: CLLocation, completion: @escaping (([CLPlacemark]?, Error?) -> ())) {
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(location, completionHandler: {
@@ -1217,6 +1209,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
             completion(placemarks, error)
         })
     }
+    
+    //MARK: - Lets us know if speech is enabled
     
     public func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
         if available {
@@ -1227,15 +1221,21 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
     }
     
     
+    //MARK: - Used for testing purposes for recording sessions for future lookover
+    
     func startRecording(_ sender: Any) {
         print("Starting recording")
         // will throw an exception if `visionManager` hasn't been started beforehand
+        
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy_MM_dd_HH_mm"
         let date = formatter.string(from: Date())
         
         let DocumentDirectory = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])
         let DirPath = DocumentDirectory.appendingPathComponent(date)
+        
+        // Save file to disk with current date/time stamp
+        
         do
         {
             try FileManager.default.createDirectory(atPath: DirPath!.path, withIntermediateDirectories: true, attributes: nil)
@@ -1251,6 +1251,8 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         
     }
     
+    //MARK: - Stop recording session
+    
     func stopRecording(_ sender: Any) {
         print("Stopping recording")
         recording = false
@@ -1258,6 +1260,7 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
         visionAManager.stopRecording()
     }
     
+    //MARK: - Toggle recording from button
     
     @IBAction func onRecordPress(_ sender: UIButton) {
         
@@ -1274,8 +1277,14 @@ class ARNavigationViewController: UIViewController, AVSpeechSynthesizerDelegate,
     
 }
 
+
+//MARK: - Extensions of this view controller for delegates
+
+
 extension ARNavigationViewController: VisionManagerDelegate {
     
+    
+    // Determine when camera has been calibrated
     func visionManager(_ visionManager: VisionManagerProtocol, didUpdateCamera camera: Camera) {
         
         DispatchQueue.main.async {
@@ -1289,6 +1298,8 @@ extension ARNavigationViewController: VisionManagerDelegate {
         }
         
     }
+    
+    // Updated when accelerometer data or over vehicle sensors are updated
     
     func visionManager(_ visionManager: VisionManagerProtocol,
                        didUpdateVehicleState vehicleState: VehicleState) {
@@ -1312,6 +1323,7 @@ extension ARNavigationViewController: VisionManagerDelegate {
             
             self!.timeSinceUpdate = Date().timeIntervalSince1970
             
+            // Check for points of interest
             
             if (self!.previousPOICheck == 0 || Date().timeIntervalSince1970 - self!.previousPOICheck > 2) {
                 self!.getNearbyPOIs()
@@ -1322,6 +1334,8 @@ extension ARNavigationViewController: VisionManagerDelegate {
             
         }
     }
+    
+    // Updated every frame
     
     func visionManagerDidCompleteUpdate(_ visionManager: VisionManagerProtocol) {
         // dispatch to the main queue in order to work with UIKit elements
@@ -1337,7 +1351,10 @@ extension ARNavigationViewController: VisionManagerDelegate {
     
 }
 
+// Delegates for Language picker in settings
+
 extension ARNavigationViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -1349,6 +1366,8 @@ extension ARNavigationViewController: UIPickerViewDelegate, UIPickerViewDataSour
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return languages[row]
     }
+    
+    // Updated labels after language change
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         currentLanguage = languages[row]
@@ -1364,7 +1383,11 @@ extension ARNavigationViewController: UIPickerViewDelegate, UIPickerViewDataSour
     
 }
 
+// Navigation delegate
+
 extension ARNavigationViewController: NavigationViewControllerDelegate, NavigationServiceDelegate {
+    
+    // Don't reroute
     
     func navigationViewController(_ navigationViewController: NavigationViewController, shouldRerouteFrom location: CLLocation) -> Bool {
         return false
@@ -1377,6 +1400,8 @@ extension ARNavigationViewController: NavigationViewControllerDelegate, Navigati
     
 }
 
+//MARK: - Street sign detection
+
 extension ARNavigationViewController: VisionSafetyManagerDelegate {
     
     func visionManager(_ visionManager: VisionManagerProtocol, didUpdateFrameSignClassifications frameSignClassifications: FrameSignClassifications) {
@@ -1384,12 +1409,12 @@ extension ARNavigationViewController: VisionSafetyManagerDelegate {
             for sign in frameSignClassifications.signs {
                 
                 switch(sign.sign.type) {
-                case .speedLimit:
-                    if sign.confidNumber < 0.9 {
+                case .speedLimit: // Speed limit adjustment
+                    if sign.confidNumber < 0.9 { // Must be confident of number
                         break
                     }
                     
-                    if speedLimit == sign.sign.number {
+                    if speedLimit == sign.sign.number { // Only change if number changes
                         break
                     }
                     
@@ -1399,6 +1424,7 @@ extension ARNavigationViewController: VisionSafetyManagerDelegate {
                         self.updateSpeedLimitView(maxSpeed: sign.sign.number)
                     }
                     
+                    // Announce the speed limit audibly
                     
                     if (previousAlert == 0 || Date().timeIntervalSince1970 - previousAlert > 4) {
                         DispatchQueue.main.async {
@@ -1417,9 +1443,11 @@ extension ARNavigationViewController: VisionSafetyManagerDelegate {
                         previousAlert = Date().timeIntervalSince1970
                     }
                 case .regulatoryStop:
-                    if sign.confidType < 0.99 {
+                    if sign.confidType < 0.99 { // Stop sign, must be confident
                         break
                     }
+                    
+                    // Audibly announce upcoming stop sign
                     if (previousAlert == 0 || Date().timeIntervalSince1970 - previousAlert > 6) {
                         DispatchQueue.main.async {
                             self.speak(text: "Stop".localized(self.languageConvert[self.currentLanguage]!))
@@ -1427,10 +1455,12 @@ extension ARNavigationViewController: VisionSafetyManagerDelegate {
                         
                         previousAlert = Date().timeIntervalSince1970
                     }
-                case .warningRoundabout:
+                case .warningRoundabout: // Rotary
                     if sign.confidType < 0.98 {
                         break
                     }
+                    
+                    // Audibly announce rotary
                     if (previousAlert == 0 || Date().timeIntervalSince1970 - previousAlert > 6) {
                         DispatchQueue.main.async {
                             self.speak(text: "Rotary".localized(self.languageConvert[self.currentLanguage]!) )
@@ -1438,10 +1468,11 @@ extension ARNavigationViewController: VisionSafetyManagerDelegate {
                         
                         previousAlert = Date().timeIntervalSince1970
                     }
-                case .regulatoryRoundabout:
+                case .regulatoryRoundabout: //Rotary
                     if sign.confidType < 0.98 {
                         break
                     }
+                    // Audibly announce rotary
                     if (previousAlert == 0 || Date().timeIntervalSince1970 - previousAlert > 4) {
                         DispatchQueue.main.async {
                             self.speak(text: "Rotary".localized(self.languageConvert[self.currentLanguage]!))
@@ -1477,6 +1508,8 @@ extension ARNavigationViewController: VisionSafetyManagerDelegate {
         }
     }
     
+    // MARK: - Detect possible future collisions and pedestrians
+    
     func visionSafetyManager(_ visionSafetyManager: VisionSafetyManager,
                              didUpdateCollisions collisions: [CollisionObject]) {
         // we will draw collisions with cars only, so we need to filter `CollisionObject`s
@@ -1498,6 +1531,7 @@ extension ARNavigationViewController: VisionSafetyManagerDelegate {
     
 }
 
+// MARK: - AR Routing, code reviewed and modified from Mapbox tutorial
 
 private extension MapboxVisionARNative.Route {
     /**

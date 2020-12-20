@@ -9,9 +9,8 @@
 /* Begin PBXBuildFile section */
 		0C60B80B6A556D72D271DBD3 /* Pods_HackUMass2020_HackUMass2020UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7F76DBEEBB4455CFB4D518 /* Pods_HackUMass2020_HackUMass2020UITests.framework */; };
 		D046FAE9258F09DB0043EB56 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D046FAEB258F09DB0043EB56 /* Localizable.strings */; };
+		D046FB0A258F8DA20043EB56 /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = D046FB09258F8DA20043EB56 /* CustomViews.swift */; };
 		D0670C74258AF74400FE1E78 /* ARNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0670C73258AF74400FE1E78 /* ARNavigationViewController.swift */; };
-		D0CBE970258C05B5006F450E /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CBE96F258C05B5006F450E /* RecordViewController.swift */; };
-		D0CBE975258D010C006F450E /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CBE974258D010C006F450E /* TestViewController.swift */; };
 		D0CBE980258D721C006F450E /* HWYGEXPD.TTF in Resources */ = {isa = PBXBuildFile; fileRef = D0CBE97D258D71FF006F450E /* HWYGEXPD.TTF */; };
 		D0CBE984258D721F006F450E /* HWYGNRRW.TTF in Resources */ = {isa = PBXBuildFile; fileRef = D0CBE97C258D71FF006F450E /* HWYGNRRW.TTF */; };
 		D0CBE985258D7222006F450E /* HWYGOTH.TTF in Resources */ = {isa = PBXBuildFile; fileRef = D0CBE97F258D71FF006F450E /* HWYGOTH.TTF */; };
@@ -62,9 +61,8 @@
 		D046FAFD258F13840043EB56 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		D046FAFE258F13840043EB56 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D046FAFF258F13850043EB56 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D046FB09258F8DA20043EB56 /* CustomViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		D0670C73258AF74400FE1E78 /* ARNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARNavigationViewController.swift; sourceTree = "<group>"; };
-		D0CBE96F258C05B5006F450E /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
-		D0CBE974258D010C006F450E /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		D0CBE97B258D71EE006F450E /* HWYGCOND.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = HWYGCOND.TTF; sourceTree = "<group>"; };
 		D0CBE97C258D71FF006F450E /* HWYGNRRW.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = HWYGNRRW.TTF; sourceTree = "<group>"; };
 		D0CBE97D258D71FF006F450E /* HWYGEXPD.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = HWYGEXPD.TTF; sourceTree = "<group>"; };
@@ -175,10 +173,9 @@
 				D0D02D0625896A8C006AFB73 /* LaunchScreen.storyboard */,
 				D0D02D0925896A8C006AFB73 /* Info.plist */,
 				D0670C73258AF74400FE1E78 /* ARNavigationViewController.swift */,
-				D0CBE96F258C05B5006F450E /* RecordViewController.swift */,
-				D0CBE974258D010C006F450E /* TestViewController.swift */,
 				D0CBE991258D7F8A006F450E /* RadialGradientLayer.swift */,
 				D046FAEB258F09DB0043EB56 /* Localizable.strings */,
+				D046FB09258F8DA20043EB56 /* CustomViews.swift */,
 			);
 			path = HackUMass2020;
 			sourceTree = "<group>";
@@ -458,9 +455,8 @@
 			files = (
 				D0D02D0025896A89006AFB73 /* ViewController.swift in Sources */,
 				D0D02CFC25896A89006AFB73 /* AppDelegate.swift in Sources */,
-				D0CBE970258C05B5006F450E /* RecordViewController.swift in Sources */,
 				D0670C74258AF74400FE1E78 /* ARNavigationViewController.swift in Sources */,
-				D0CBE975258D010C006F450E /* TestViewController.swift in Sources */,
+				D046FB0A258F8DA20043EB56 /* CustomViews.swift in Sources */,
 				D0CBE992258D7F8A006F450E /* RadialGradientLayer.swift in Sources */,
 				D0D02CFE25896A89006AFB73 /* SceneDelegate.swift in Sources */,
 			);
