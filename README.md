@@ -36,7 +36,18 @@ I'm a very nervous driver and I always go down wrong turns or make rash decision
 ## Installation
 - Install [Cocoapods](https://cocoapods.org)
 - Clone the repository
-- Navigate to the podfile directory and run `pod install`
+- Run `pod init`
+- Add following pods to Podfile
+    - MapboxMobileEvents
+    - Mapbox-iOS-SDK
+    - MapboxVisionNativeAll
+    - MapboxVision
+    - MapboxVisionAR
+    - MapboxVisionSafety
+    - MapboxDirections
+    - MapboxNavigation
+    - RadarSDK
+- run `pod install`
 - Open the .xcworkspace file
 - Build and Run!
 
