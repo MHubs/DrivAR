@@ -18,7 +18,7 @@ I'm a very nervous driver and I always go down wrong turns or make rash decision
 
 [![DrivAR Video](http://img.youtube.com/vi/wGgzpdAhnos/0.jpg)](https://www.youtube.com/watch?v=wGgzpdAhnos&feature=youtu.be&hd=1 "DrivAR")
 
-## Tech/framework used
+## Tech/Frameworks used
 <b>Built with</b>
 - [Radar.io](https://radar.io)
 - [Mapbox](https://www.mapbox.com/vision)
