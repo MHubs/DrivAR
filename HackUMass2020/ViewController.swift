@@ -14,6 +14,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    // Go to load session view controller
+    
     @IBAction func toLoad(_ sender: UIButton) {
         self.performSegue(withIdentifier: "toLoad", sender: self)
     }

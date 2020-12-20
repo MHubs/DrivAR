@@ -1,7 +1,9 @@
 import Foundation
 import UIKit
 
-
+/*
+    Layer to create a radial gradient effect
+ */
 class RadialGradientLayer: CALayer {
 
     var center: CGPoint {
